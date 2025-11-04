@@ -444,14 +444,14 @@ class MultiModelManager(BaseChatModel):
                     )
                     
                     # Record successful request
-                    self.usage_tracker.record_request(model_idx, success=True)
-                    self.rate_limiter.record_request(model_idx)
+                    self._usage_tracker.record_request(model_idx, success=True)
+                    self._rate_limiter.record_request(model_idx)
                     
                     return result
                     
                 except Exception as e:
                     # Record failed request
-                    self.usage_tracker.record_request(model_idx, success=False)
+                    self._usage_tracker.record_request(model_idx, success=False)
                     
                     logger.warning(
                         f"Native structured output failed for model {model_idx}: "
@@ -471,7 +471,7 @@ class MultiModelManager(BaseChatModel):
                             )
                             
                             # Record successful request
-                            self.usage_tracker.record_request(model_idx, success=True)
+                            self._usage_tracker.record_request(model_idx, success=True)
                             
                             return result
                             
@@ -497,14 +497,14 @@ class MultiModelManager(BaseChatModel):
                     )
                     
                     # Record successful request
-                    self.usage_tracker.record_request(model_idx, success=True)
-                    self.rate_limiter.record_request(model_idx)
+                    self._usage_tracker.record_request(model_idx, success=True)
+                    self._rate_limiter.record_request(model_idx)
                     
                     return result
                     
                 except Exception as e:
                     # Record failed request
-                    self.usage_tracker.record_request(model_idx, success=False)
+                    self._usage_tracker.record_request(model_idx, success=False)
                     
                     logger.error(
                         f"Fallback parsing failed for model {model_idx}: "
