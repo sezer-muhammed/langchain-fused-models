@@ -43,10 +43,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/langchain-fused-model"
-Documentation = "https://github.com/yourusername/langchain-fused-model#readme"
-Repository = "https://github.com/yourusername/langchain-fused-model"
-Issues = "https://github.com/yourusername/langchain-fused-model/issues"
+Homepage = "https://github.com/sezer-muhammed/langchain-fused-models"
+Documentation = "https://github.com/sezer-muhammed/langchain-fused-models#readme"
+Repository = "https://github.com/sezer-muhammed/langchain-fused-models"
+Issues = "https://github.com/sezer-muhammed/langchain-fused-models/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
