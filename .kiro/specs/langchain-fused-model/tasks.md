@@ -182,52 +182,33 @@
   - Create structured_output_model fixture with native structured output support
   - _Requirements: 9.5_
 
-- [ ]* 14. Write unit tests for RateLimiter
-  - Create test_rate_limiter.py
-  - Write test for RPM limit enforcement
-  - Write test for RPS limit enforcement
-  - Write test for cooldown behavior
-  - Write test for availability checking with multiple models
-  - _Requirements: 9.1_
-
-- [ ]* 15. Write unit tests for routing strategies
-  - Create test_strategies.py
-  - Write test for PRIORITY strategy selecting highest priority model
-  - Write test for ROUND_ROBIN strategy distributing requests evenly
-  - Write test for LEAST_USED strategy selecting least utilized model
-  - Write test for COST_AWARE strategy selecting lowest cost model
-  - Write test for custom strategy function
-  - _Requirements: 9.4_
-
-- [ ]* 16. Write unit tests for structured output
-  - Create test_structured_output.py
-  - Write test for native structured output detection and delegation
-  - Write test for fallback prompt injection with format instructions
-  - Write test for JSON extraction from model responses
-  - Write test for Pydantic validation of parsed JSON
-  - Write test for error handling with invalid JSON
-  - Write test for error handling with validation failures
-  - _Requirements: 9.2, 9.3_
-
-- [ ]* 17. Write unit tests for MultiModelManager
-  - Create test_manager.py
-  - Write test for initialization with various configurations
-  - Write test for model selection with different strategies
-  - Write test for automatic fallback on rate limit errors
-  - Write test for automatic fallback on timeout errors
-  - Write test for AllModelsFailedError when all models fail
-  - Write test for LangChain invoke method
-  - Write test for LangChain batch method
-  - Write test for piping with other Runnables
-  - Write test for callback emission (on_llm_start, on_llm_end, on_llm_error)
-  - _Requirements: 9.1, 9.4_
-
-- [x] 18. Create documentation and examples
+- [x] 14. Write unit tests (isolated with mocks)
 
 
 
 
 
+  - Create test_unit.py
+  - Test RateLimiter: RPM/RPS enforcement, cooldown behavior with mocked time
+  - Test routing strategies: PRIORITY, ROUND_ROBIN, LEAST_USED, COST_AWARE logic
+  - Test structured output: JSON extraction, Pydantic validation, error handling
+  - Test MultiModelManager: initialization, model selection, fallback logic with mocked dependencies
+  - _Requirements: 9.1, 9.2, 9.3, 9.4_
+
+- [x] 15. Write system tests (integration with MockChatModel)
+
+
+
+
+
+  - Create test_system.py
+  - Test MultiModelManager with MockChatModel: all routing strategies, rate limiting, fallback on errors
+  - Test structured output: native and fallback modes with MockChatModel
+  - Test LangChain integration: invoke, batch, piping, callbacks
+  - Test AllModelsFailedError when all models fail
+  - _Requirements: 9.1, 9.2, 9.3, 9.4_
+
+- [x] 16. Create documentation and examples
   - Update README.md with installation instructions (pip install langchain-fused-model)
   - Add usage examples to README.md showing basic MultiModelManager setup
   - Add routing strategy configuration examples to README.md
@@ -238,22 +219,9 @@
   - Add docstrings to all public classes and methods
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
-- [x] 19. Create contribution guidelines and CI/CD
-
-
-
-
-
+- [x] 17. Create contribution guidelines and CI/CD
   - Create CONTRIBUTING.md with contribution guidelines and development setup
   - Create .github/workflows/test.yml for automated testing with pytest
   - Create .github/workflows/lint.yml for code linting with ruff or flake8
   - Configure GitHub repository with issues enabled
   - _Requirements: 10.1, 10.2, 10.3, 10.4_
-
-- [ ] 20. Prepare for PyPI distribution
-  - Verify pyproject.toml has correct package metadata (name, version, description, authors, license)
-  - Verify all dependencies are properly specified with version constraints
-  - Test package build with `python -m build`
-  - Test package installation in clean virtual environment
-  - Create release documentation with version notes
-  - _Requirements: 1.1, 1.5_
