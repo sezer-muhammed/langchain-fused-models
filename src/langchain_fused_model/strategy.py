@@ -1,7 +1,7 @@
 """Routing strategies for model selection."""
 
 from enum import Enum
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Union
 
 from .manager import ModelConfig
 from .usage_tracker import UsageStats
@@ -37,7 +37,7 @@ class StrategySelector:
 
     def select(
         self,
-        strategy: RoutingStrategy | Callable,
+        strategy: Union[RoutingStrategy, Callable],
         models: List[Any],
         configs: List[ModelConfig],
         usage_stats: Dict[int, UsageStats],

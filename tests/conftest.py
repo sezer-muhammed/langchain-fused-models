@@ -1,6 +1,6 @@
 """Pytest fixtures for testing langchain-fused-model."""
 
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Type
 
 import pytest
 from langchain_core.callbacks import CallbackManagerForLLMRun
@@ -108,7 +108,7 @@ class StructuredOutputChatModel(BaseChatModel):
         generation = ChatGeneration(message=message)
         return ChatResult(generations=[generation])
 
-    def with_structured_output(self, schema: type[BaseModel], **kwargs: Any):
+    def with_structured_output(self, schema: Type[BaseModel], **kwargs: Any):
         """Mock native structured output support."""
 
         def structured_invoke(messages):
