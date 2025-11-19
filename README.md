@@ -401,7 +401,7 @@ Check out the `examples/` directory for Jupyter notebooks demonstrating:
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.9+
 - langchain-core >= 0.1.0
 - pydantic >= 2.0.0
 
