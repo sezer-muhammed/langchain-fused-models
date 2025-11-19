@@ -3,7 +3,7 @@
 import logging
 import time
 from collections import deque
-from typing import Dict, Optional
+from typing import Dict
 
 from .manager import ModelConfig
 
@@ -36,9 +36,7 @@ class RateLimiter:
         if model_idx in self._cooldowns:
             if current_time < self._cooldowns[model_idx]:
                 remaining = self._cooldowns[model_idx] - current_time
-                logger.info(
-                    f"Model {model_idx} is in cooldown for {remaining:.1f} more seconds"
-                )
+                logger.info(f"Model {model_idx} is in cooldown for {remaining:.1f} more seconds")
                 return False
             else:
                 # Cooldown expired, remove it
@@ -48,17 +46,13 @@ class RateLimiter:
         # Check RPM limit if configured
         if config.max_rpm is not None:
             if not self._check_rpm(model_idx, config.max_rpm):
-                logger.info(
-                    f"Model {model_idx} has reached RPM limit of {config.max_rpm}"
-                )
+                logger.info(f"Model {model_idx} has reached RPM limit of {config.max_rpm}")
                 return False
 
         # Check RPS limit if configured
         if config.max_rps is not None:
             if not self._check_rps(model_idx, config.max_rps):
-                logger.info(
-                    f"Model {model_idx} has reached RPS limit of {config.max_rps}"
-                )
+                logger.info(f"Model {model_idx} has reached RPS limit of {config.max_rps}")
                 return False
 
         return True
