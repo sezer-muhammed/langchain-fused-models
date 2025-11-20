@@ -7,7 +7,7 @@ with features like intelligent routing, rate limiting, automatic fallback, and s
 output support.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 
 from .exceptions import (
     AllModelsFailedError,
