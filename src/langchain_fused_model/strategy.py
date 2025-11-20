@@ -33,7 +33,9 @@ class StrategySelector:
 
     def __init__(self):
         """Initialize the strategy selector."""
+        import threading
         self._round_robin_counter: int = 0
+        self._lock = threading.Lock()
 
     def select(
         self,
@@ -118,9 +120,10 @@ class StrategySelector:
         Returns:
             Index of the next model in the rotation.
         """
-        # Select model based on counter and wrap around
-        selected_idx = self._round_robin_counter % len(available_models)
-        self._round_robin_counter += 1
+        with self._lock:
+            # Select model based on counter and wrap around
+            selected_idx = self._round_robin_counter % len(available_models)
+            self._round_robin_counter += 1
 
         return available_models[selected_idx]
 

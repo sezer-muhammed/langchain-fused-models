@@ -105,9 +105,14 @@ class TestBatchMethod:
 
         assert len(results) == 3
         # With round-robin, each model should be used once
-        assert results[0].content == "Response from model 1"
-        assert results[1].content == "Response from model 2"
-        assert results[2].content == "Response from model 3"
+        # Since batch execution order is not guaranteed, we check that we got unique responses from all models
+        responses = {result.content for result in results}
+        expected_responses = {
+            "Response from model 1",
+            "Response from model 2",
+            "Response from model 3",
+        }
+        assert responses == expected_responses
 
     def test_batch_empty_list(self, dummy_chat_model):
         """Test batch method with empty input list."""
