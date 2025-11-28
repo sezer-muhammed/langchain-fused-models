@@ -1,7 +1,7 @@
 """Routing strategies for model selection."""
 
 from enum import Enum
-from typing import Any, Callable, Dict, List, Union
+from typing import Any, Callable, Union
 
 from .manager import ModelConfig
 from .usage_tracker import UsageStats
@@ -40,10 +40,10 @@ class StrategySelector:
     def select(
         self,
         strategy: Union[RoutingStrategy, Callable],
-        models: List[Any],
-        configs: List[ModelConfig],
-        usage_stats: Dict[int, UsageStats],
-        available_models: List[int],
+        models: list[Any],
+        configs: list[ModelConfig],
+        usage_stats: dict[int, UsageStats],
+        available_models: list[int],
     ) -> int:
         """Select a model based on the configured strategy.
 
@@ -86,7 +86,7 @@ class StrategySelector:
         else:
             raise ValueError(f"Unknown routing strategy: {strategy}")
 
-    def _priority_select(self, configs: List[ModelConfig], available_models: List[int]) -> int:
+    def _priority_select(self, configs: list[ModelConfig], available_models: list[int]) -> int:
         """Select the highest priority available model.
 
         Args:
@@ -108,7 +108,7 @@ class StrategySelector:
 
         return best_model
 
-    def _round_robin_select(self, available_models: List[int]) -> int:
+    def _round_robin_select(self, available_models: list[int]) -> int:
         """Select the next model in rotation.
 
         Distributes requests evenly across available models using
@@ -128,7 +128,7 @@ class StrategySelector:
         return available_models[selected_idx]
 
     def _least_used_select(
-        self, usage_stats: Dict[int, UsageStats], available_models: List[int]
+        self, usage_stats: dict[int, UsageStats], available_models: list[int]
     ) -> int:
         """Select the model with the lowest usage count.
 
@@ -151,7 +151,7 @@ class StrategySelector:
 
         return best_model
 
-    def _cost_aware_select(self, configs: List[ModelConfig], available_models: List[int]) -> int:
+    def _cost_aware_select(self, configs: list[ModelConfig], available_models: list[int]) -> int:
         """Select the lowest cost available model.
 
         Prioritizes models with lower cost_per_1k_tokens values.

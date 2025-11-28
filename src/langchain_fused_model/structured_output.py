@@ -3,7 +3,7 @@
 import json
 import logging
 import re
-from typing import Any, List, Type
+from typing import Any
 
 from langchain_core.messages import BaseMessage, SystemMessage
 from langchain_core.output_parsers import JsonOutputParser
@@ -51,7 +51,7 @@ class StructuredOutputHandler:
         return has_support
 
     def invoke_native(
-        self, model: Any, schema: Type[BaseModel], messages: List[BaseMessage], **kwargs: Any
+        self, model: Any, schema: type[BaseModel], messages: list[BaseMessage], **kwargs: Any
     ) -> BaseModel:
         """Invoke model with native structured output.
 
@@ -89,7 +89,7 @@ class StructuredOutputHandler:
             )
 
     def invoke_with_parsing(
-        self, model: Any, schema: Type[BaseModel], messages: List[BaseMessage], **kwargs: Any
+        self, model: Any, schema: type[BaseModel], messages: list[BaseMessage], **kwargs: Any
     ) -> BaseModel:
         """Invoke model and parse output to structured format.
 
@@ -147,8 +147,8 @@ class StructuredOutputHandler:
             )
 
     def _inject_format_instructions(
-        self, messages: List[BaseMessage], schema: Type[BaseModel]
-    ) -> List[BaseMessage]:
+        self, messages: list[BaseMessage], schema: type[BaseModel]
+    ) -> list[BaseMessage]:
         """Add JSON schema instructions to messages.
 
         Injects format instructions into the message list to guide the model
@@ -226,7 +226,7 @@ class StructuredOutputHandler:
             f"Could not extract valid JSON from model response. Response: {text[:200]}..."
         )
 
-    def _parse_to_model(self, json_str: str, schema: Type[BaseModel]) -> BaseModel:
+    def _parse_to_model(self, json_str: str, schema: type[BaseModel]) -> BaseModel:
         """Parse JSON string and validate with Pydantic.
 
         Parses the JSON string and validates it against the Pydantic schema.

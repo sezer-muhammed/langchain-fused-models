@@ -2,7 +2,7 @@
 
 import time
 from dataclasses import dataclass
-from typing import Dict, Optional
+from typing import Optional
 
 
 @dataclass
@@ -33,7 +33,7 @@ class UsageTracker:
 
     def __init__(self):
         """Initialize the usage tracker with an empty statistics dictionary."""
-        self._stats: Dict[int, UsageStats] = {}
+        self._stats: dict[int, UsageStats] = {}
 
     def record_request(self, model_idx: int, success: bool, tokens: int = 0) -> None:
         """Record a request outcome and update statistics.
@@ -70,7 +70,7 @@ class UsageTracker:
         """
         return self._stats.get(model_idx, UsageStats())
 
-    def get_all_stats(self) -> Dict[int, UsageStats]:
+    def get_all_stats(self) -> dict[int, UsageStats]:
         """Get usage statistics for all models.
 
         Returns:

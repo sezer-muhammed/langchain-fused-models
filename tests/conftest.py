@@ -1,6 +1,6 @@
 """Pytest fixtures for testing langchain-fused-model."""
 
-from typing import Any, List, Optional, Type
+from typing import Any, Optional
 
 import pytest
 from langchain_core.callbacks import CallbackManagerForLLMRun

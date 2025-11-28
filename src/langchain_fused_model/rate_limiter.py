@@ -3,7 +3,6 @@
 import logging
 import time
 from collections import deque
-from typing import Dict
 
 from .manager import ModelConfig
 
@@ -16,8 +15,8 @@ class RateLimiter:
 
     def __init__(self):
         """Initialize rate limiter with empty tracking dictionaries."""
-        self._request_times: Dict[int, deque] = {}
-        self._cooldowns: Dict[int, float] = {}
+        self._request_times: dict[int, deque] = {}
+        self._cooldowns: dict[int, float] = {}
 
     def is_available(self, model_idx: int, config: ModelConfig) -> bool:
         """

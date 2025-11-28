@@ -105,7 +105,8 @@ class TestBatchMethod:
 
         assert len(results) == 3
         # With round-robin, each model should be used once
-        # Since batch execution order is not guaranteed, we check that we got unique responses from all models
+        # Since batch execution order is not guaranteed, we check that we got
+        # unique responses from all models
         responses = {result.content for result in results}
         expected_responses = {
             "Response from model 1",

@@ -2,7 +2,7 @@
 
 import logging
 from dataclasses import dataclass, field
-from typing import Any, Callable, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Optional, Union
 
 from langchain_core.callbacks import CallbackManagerForLLMRun
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -33,7 +33,7 @@ class ModelConfig:
     max_rps: Optional[int] = None
     cost_per_1k_tokens: float = 0.0
     timeout: Optional[float] = None
-    retry_on_errors: List[Type[Exception]] = field(default_factory=list)
+    retry_on_errors: list[type[Exception]] = field(default_factory=list)
 
 
 class MultiModelManager(BaseChatModel):
@@ -52,8 +52,8 @@ class MultiModelManager(BaseChatModel):
     """
 
     # Declare fields for Pydantic v2 compatibility
-    models: List[BaseChatModel]
-    model_configs: List[ModelConfig]
+    models: list[BaseChatModel]
+    model_configs: list[ModelConfig]
     strategy: Union[str, Callable]
     default_fallback: bool
 
@@ -67,8 +67,8 @@ class MultiModelManager(BaseChatModel):
 
     def __init__(
         self,
-        models: List[BaseChatModel],
-        model_configs: Optional[List[ModelConfig]] = None,
+        models: list[BaseChatModel],
+        model_configs: Optional[list[ModelConfig]] = None,
         strategy: Union[str, Callable] = "priority",
         default_fallback: bool = True,
         **kwargs: Any,
@@ -145,7 +145,7 @@ class MultiModelManager(BaseChatModel):
             "model_types": [model._llm_type for model in self.models],
         }
 
-    def _select_model(self) -> Tuple[BaseChatModel, int]:
+    def _select_model(self) -> tuple[BaseChatModel, int]:
         """Select a model based on strategy and availability.
 
         This method filters available models based on rate limits and cooldowns,
@@ -192,7 +192,7 @@ class MultiModelManager(BaseChatModel):
         return selected_model, selected_idx
 
     def _invoke_with_fallback(
-        self, model_idx: int, messages: List[BaseMessage], **kwargs: Any
+        self, model_idx: int, messages: list[BaseMessage], **kwargs: Any
     ) -> ChatResult:
         """Invoke model with automatic fallback on failure.
 
@@ -316,8 +316,8 @@ class MultiModelManager(BaseChatModel):
 
     def _generate(
         self,
-        messages: List[BaseMessage],
-        stop: Optional[List[str]] = None,
+        messages: list[BaseMessage],
+        stop: Optional[list[str]] = None,
         run_manager: Optional[CallbackManagerForLLMRun] = None,
         **kwargs: Any,
     ) -> ChatResult:
@@ -365,7 +365,7 @@ class MultiModelManager(BaseChatModel):
             # Re-raise the exception
             raise
 
-    def with_structured_output(self, schema: Type[BaseModel], **kwargs: Any) -> Runnable:
+    def with_structured_output(self, schema: type[BaseModel], **kwargs: Any) -> Runnable:
         """Return a runnable that outputs structured data.
 
         This method creates a Runnable that wraps the MultiModelManager and
@@ -399,7 +399,7 @@ class MultiModelManager(BaseChatModel):
         handler = StructuredOutputHandler()
 
         # Define the structured output function
-        def structured_output_func(messages: Union[List[BaseMessage], str]) -> BaseModel:
+        def structured_output_func(messages: Union[list[BaseMessage], str]) -> BaseModel:
             """Internal function that handles structured output logic.
 
             Args:
