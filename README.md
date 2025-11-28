@@ -1,5 +1,7 @@
 # langchain-fused-model
 
+![Preview](https://bmeqhxsikltbwjf8.public.blob.vercel-storage.com/Untitled%20diagram-2025-11-28-230118.png)
+
 Intelligent routing and management for multiple LangChain ChatModel instances with advanced features like rate limiting, automatic fallback, and structured output support.
 
 ## Table of Contents
